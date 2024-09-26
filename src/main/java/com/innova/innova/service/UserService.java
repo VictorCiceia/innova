@@ -3,6 +3,7 @@ package com.innova.innova.service;
 import com.innova.innova.Entity.UserEntity;
 import com.innova.innova.Repository.UserRepository;
 import com.innova.innova.dto.UserDto;
+import com.innova.innova.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,10 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto findById(final String id) {
-        final UserEntity user = this.userRepository.findById(id)
-                .orElseThrow(null);
-        return this.toDto(user);
+    public UserDto findById(final String id) throws ResourceNotFoundException {
+        return this.userRepository.findById(id)
+                .map(this::toDto)
+                .orElseThrow(()-> new ResourceNotFoundException("Usuario con el id " + id + "no fue encontrado"));
     }
 
     public UserDto save(final UserDto user) {

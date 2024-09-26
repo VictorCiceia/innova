@@ -1,6 +1,7 @@
 package com.innova.innova.controller;
 
 import com.innova.innova.dto.UserDto;
+import com.innova.innova.exception.ResourceNotFoundException;
 import com.innova.innova.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDto findById(@PathVariable String id){
+    public UserDto findById(@PathVariable String id) throws ResourceNotFoundException {
         return this.userService.findById(id);
     }
 
