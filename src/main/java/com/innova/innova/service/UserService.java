@@ -1,12 +1,11 @@
 package com.innova.innova.service;
 
+import com.innova.innova.Entity.UserEntity;
 import com.innova.innova.Repository.UserRepository;
-import com.innova.innova.document.UserDocument;
 import com.innova.innova.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,42 +22,40 @@ public class UserService {
     }
 
     public UserDto findById(final String id) {
-        final UserDocument user = this.userRepository.findById(id)
+        final UserEntity user = this.userRepository.findById(id)
                 .orElseThrow(null);
         return this.toDto(user);
     }
 
     public UserDto save(final UserDto user) {
-        final UserDocument userEntity = this.toDocument(user);
-        userEntity.setDate(new Date());
-        final UserDocument saveEntity = this.userRepository.save(userEntity);
+        final UserEntity userEntity = this.toDocument(user);
+        final UserEntity saveEntity = this.userRepository.save(userEntity);
         return this.toDto(saveEntity);
     }
 
     public UserDto update(final String id, final UserDto userDto) {
-        final UserDocument userDocument = this.userRepository.findById(id)
+        final UserEntity userEntity = this.userRepository.findById(id)
                 .orElseThrow(null);
-        userDocument.setName(userDto.getName());
-        final UserDocument saveDocument = this.userRepository.save(userDocument);
+        userEntity.setName(userDto.getName());
+        final UserEntity saveDocument = this.userRepository.save(userEntity);
         return this.toDto(saveDocument);
     }
 
     public void delete(final String id) {
-        final UserDocument userDocument = this.userRepository.findById(id)
+        final UserEntity userEntity = this.userRepository.findById(id)
                 .orElseThrow(null);
-        this.userRepository.delete(userDocument);
-        //this.userRepository.deleteById(id);
+        this.userRepository.delete(userEntity);
     }
 
-    private UserDto toDto(final UserDocument document) {
+    private UserDto toDto(final UserEntity entity) {
         final UserDto dto = new UserDto();
-        dto.setId(document.getId());
-        dto.setName(document.getName());
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
         return dto;
     }
 
-    private UserDocument toDocument(final UserDto dto) {
-        final UserDocument entity = new UserDocument();
+    private UserEntity toDocument(final UserDto dto) {
+        final UserEntity entity = new UserEntity();
         entity.setName(dto.getName());
         return entity;
     }
