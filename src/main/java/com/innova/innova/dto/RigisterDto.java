@@ -1,27 +1,14 @@
 package com.innova.innova.dto;
 
-public class UserDto {
-
-    private String id;
+public class RigisterDto {
 
     private String name;
 
     private String email;
 
-    public UserDto(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private String password;
 
-    public UserDto() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public RigisterDto() {
     }
 
     public String getName() {
@@ -38,5 +25,13 @@ public class UserDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

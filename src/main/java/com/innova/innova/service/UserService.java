@@ -2,6 +2,7 @@ package com.innova.innova.service;
 
 import com.innova.innova.Entity.UserEntity;
 import com.innova.innova.Repository.UserRepository;
+import com.innova.innova.dto.RigisterDto;
 import com.innova.innova.dto.UserDto;
 import com.innova.innova.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class UserService {
                 .orElseThrow(()-> new ResourceNotFoundException("Usuario con el id " + id + "no fue encontrado"));
     }
 
-    public UserDto save(final UserDto user) {
-        final UserEntity userEntity = this.toDocument(user);
+    public UserDto save(final RigisterDto user) {
+        final UserEntity userEntity = this.toEntity(user);
         final UserEntity saveEntity = this.userRepository.save(userEntity);
         return this.toDto(saveEntity);
     }
@@ -52,12 +53,15 @@ public class UserService {
         final UserDto dto = new UserDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setEmail(entity.getEmail());
         return dto;
     }
 
-    private UserEntity toDocument(final UserDto dto) {
+    private UserEntity toEntity(final RigisterDto dto) {
         final UserEntity entity = new UserEntity();
         entity.setName(dto.getName());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
         return entity;
     }
 
