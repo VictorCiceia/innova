@@ -7,6 +7,10 @@ public class AuthDto {
     public AuthDto() {
     }
 
+    public AuthDto(String token) {
+        this.token = token;
+    }
+
     public String getToken() {
         return token;
     }
