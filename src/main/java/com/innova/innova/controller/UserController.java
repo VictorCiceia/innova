@@ -1,6 +1,6 @@
 package com.innova.innova.controller;
 
-import com.innova.innova.dto.RigisterDto;
+import com.innova.innova.dto.RegisterDto;
 import com.innova.innova.dto.UserDto;
 import com.innova.innova.exception.ResourceNotFoundException;
 import com.innova.innova.service.UserService;
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto save(@RequestBody RigisterDto user){
+    public UserDto save(@RequestBody RegisterDto user){
         return this.userService.save(user);
     }
 

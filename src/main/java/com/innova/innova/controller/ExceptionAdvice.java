@@ -18,6 +18,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String resourceNotFoundException(final ResourceNotFoundException e) {
+        logger.error("ResourceNotFoundException", e);
         return e.getMessage();
     }
 

@@ -1,6 +1,6 @@
 package com.innova.innova.dto;
 
-public class RigisterDto {
+public class RegisterDto {
 
     private String name;
 
@@ -8,7 +8,7 @@ public class RigisterDto {
 
     private String password;
 
-    public RigisterDto() {
+    public RegisterDto() {
     }
 
     public String getName() {
